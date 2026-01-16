@@ -3,9 +3,11 @@
   "version": "2.0.0",
   "description": "Boilerplate for WDD 330 SleepOutside project",
   "main": "main.js",
-  "scripts": {
+   "scripts": {
     "start": "vite",
+    "dev": "vite",
     "build": "vite build --emptyOutDir",
+    "preview": "vite preview -d ../dist --open",
     "lint": "eslint *.js src/**/*.js",
     "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
     "test": "jest"
