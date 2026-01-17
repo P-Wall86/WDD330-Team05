@@ -21,9 +21,22 @@ function removeFromCart(productId) {
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map(cartItemTemplate);
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  setupRemoveItemListeners();
+
+  if (cartItems.length > 0) {
+    document.querySelector(".cart-footer").classList.remove("hide");
+
+    const total = cartItems.reduce((sum, item) => sum + parseFloat(item.FinalPrice), 0);
+
+    document.querySelector(".cart-total").innerText = `Total: $${total.toFixed(2)}`;
+
+    const htmlItems = cartItems.map(cartItemTemplate);
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+    setupRemoveItemListeners();
+    
+  } else {
+    document.querySelector(".product-list").innerHTML = "Your cart is empty.";
+    document.querySelector(".cart-footer").classList.add("hide");
+  }
 }
 
 function cartItemTemplate(item) {

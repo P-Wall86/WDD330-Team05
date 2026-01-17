@@ -158,9 +158,10 @@ button {
 
 .product-list {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;
   list-style-type: none;
-  justify-content: center;
+  padding: 0;
+  gap: 15px;
 }
 
 .product-list a {
@@ -170,11 +171,9 @@ button {
 
 /* Styles for product lists */
 .product-card {
-  flex: 1 1 45%;
-  margin: 0.25em;
-  padding: 0.5em;
-  border: 1px solid var(--light-grey);
-  max-width: 250px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .product-card h2,
@@ -206,10 +205,27 @@ button {
 /* Start cart list card styles */
 .cart-card {
   display: grid;
-  grid-template-columns: 25% auto 15%;
-  font-size: var(--small-font);
-  /* max-height: 120px; */
+  grid-template-columns: 1fr 2fr 1fr 1fr auto;
+  grid-template-rows: auto;
   align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.remove-item {
+  grid-column: 5;
+  grid-row: 1;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.2s;
+  padding: 5px;
+}
+
+.remove-item:hover {
+  color: #ff4444;
 }
 
 .cart-card__image {
@@ -239,6 +255,22 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.hide {
+  display: none;
+}
+
+.cart-footer {
+  margin-top: 1rem;
+  border-top: 1px solid var(--tertiary-color);
+  padding-top: 1rem;
+}
+
+.cart-total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: right;
 }
 
 @media screen and (min-width: 500px) {
