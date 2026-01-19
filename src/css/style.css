@@ -261,3 +261,42 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Discount Badge Styles */
+.discount-badge {
+  display: inline-block;
+  background-color: #dc2626;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.discount-badge__text {
+  font-weight: bold;
+  font-size: 0.95em;
+  display: block;
+  text-align: center;
+}
+
+.discount-info {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.discount-original-price {
+  color: #666;
+  font-size: 0.9em;
+  margin: 0.25rem 0;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.discount-final-price {
+  color: #dc2626;
+  font-size: 1.1em;
+  margin: 0.25rem 0;
+}
