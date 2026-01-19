@@ -1,18 +1,37 @@
 import { getLocalStorage } from "./utils.mjs";
 
+function setupRemoveItemListeners() {
+  const removeButtons = document.querySelectorAll(".remove-item");
+
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const productId = event.currentTarget.getAttribute("data-id");
+      removeFromCart(productId);
+      renderCartContents();
+      setupRemoveItemListeners();
+    });
+  });
+}
+
+function removeFromCart(productId) {
+  let cart = getLocalStorage("so-cart") || [];
+  cart = cart.filter((item) => item.Id !== productId);
+  localStorage.setItem("so-cart", JSON.stringify(cart));
+}
+
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  const htmlItems = cartItems.map(cartItemTemplate);
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  setupRemoveItemListeners();
 }
 
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
+  return `
+  <li class="cart-card divider">
+  <button class="remove-item" data-id="${item.Id}" aria-label="Remove ${item.Name} from cart">X</button>
   <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
+    <img src="${item.Image}" alt="${item.Name}"/>
   </a>
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
@@ -21,8 +40,6 @@ function cartItemTemplate(item) {
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
-
-  return newItem;
 }
 
 renderCartContents();
