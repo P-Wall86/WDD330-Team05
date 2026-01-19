@@ -22,17 +22,17 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
+// Render a list of items using a template function into a parent element
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  if (!parentElement) return;
+  if (clear) parentElement.innerHTML = "";
+  const html = list.map((item) => templateFn(item)).join("");
+  parentElement.insertAdjacentHTML(position, html);
+}
+
 // get a parameter from the URL query string
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
-}
-
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
-  if (clear) {
-    parentElement.innerHTML = "";
-  }
-  const htmlStrings = list.map(templateFn);
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }

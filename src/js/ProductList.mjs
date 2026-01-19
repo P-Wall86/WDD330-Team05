@@ -1,7 +1,7 @@
-import { renderListWithTemplate } from './utils.mjs';
+import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
-    return `
+  return `
     <li class="product-card">
     <a href="product_pages/?product=${product.Id}">
         <img
@@ -17,14 +17,14 @@ function productCardTemplate(product) {
 }
 
 export default class ProductList {
-    constructor(category, dataSource, listElement) {
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
+  constructor(category, dataSource, listElement) {
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
 
-    async init() {
-        const list = await this.dataSource.getData(this.category);
-        renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
-    }
-}
+  async init() {
+    const list = await this.dataSource.getData(this.category);
+    renderListWithTemplate(productCardTemplate, this.listElement, list, "afterbegin", true);
+  }
+}   
