@@ -1,4 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
+import {loadHeaderFooter} from "./utils.mjs";
 
 function setupRemoveItemListeners() {
   const removeButtons = document.querySelectorAll(".remove-item");
@@ -43,3 +44,4 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+loadHeaderFooter();
