@@ -43,5 +43,5 @@ function cartItemTemplate(item) {
 </li>`;
 }
 
-renderCartContents();
 loadHeaderFooter();
+renderCartContents();

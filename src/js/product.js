@@ -7,5 +7,6 @@ const dataSource = new ProductData("tents");
 const productId = getParam("product");
 
 const productDetails = new ProductDetails(productId, dataSource);
+
 loadHeaderFooter();
 productDetails.init();
