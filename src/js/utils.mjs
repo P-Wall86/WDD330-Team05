@@ -36,3 +36,29 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+// Load an HTML partial from a file
+export async function loadTemplate(url) {
+  const response = await fetch(url);
+  const template = await response.text();
+  return template;
+}
+
+// Render a template into the DOM
+export function renderWithTemplate(template, parentElement) {
+  if (!parentElement) return;
+  parentElement.insertAdjacentHTML("afterbegin", template);
+}
+
+// Load header and footer templates
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("/public/partials/header.html");
+  const footerTemplate = await loadTemplate("/public/partials/footer.html");
+
+  const headerElement = document.getElementById("main-header");
+  const footerElement = document.getElementById("main-footer");
+
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+}
+
