@@ -21,10 +21,29 @@ function removeFromCart(productId) {
 }
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map(cartItemTemplate);
+  const cartItems = getLocalStorage("so-cart") || [];
+  
+  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+  if (cartItems.length > 0) {
+      calculateListTotal(cartItems);
+  } else {
+      document.querySelector(".cart-footer").classList.add("hide");
+  }
+
   setupRemoveItemListeners();
+}
+
+function calculateListTotal(cartItems) {
+  const amounts = cartItems.map((item) => item.FinalPrice);
+  const total = amounts.reduce((sum, item) => sum + item, 0);
+  
+  const cartFooter = document.querySelector(".cart-footer");
+  const cartTotal = document.querySelector(".cart-total");
+  
+  cartTotal.innerText = `Total: $${total.toFixed(2)}`; 
+  cartFooter.classList.remove("hide");
 }
 
 function cartItemTemplate(item) {
@@ -40,7 +59,7 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
+  </li>`;
 }
 
 loadHeaderFooter();
