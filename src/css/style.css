@@ -325,3 +325,38 @@ footer {
   margin: 0.25rem 0;
 }
 
+/* Categories just for the activity */
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 2rem 0;
+}
+
+.category-link {
+  text-align: center;
+  text-decoration: none;
+  color: var(--dark-grey);
+  font-family: var(--font-body);
+}
+
+.category-link img {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.category-link:hover img {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.category-link p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Categories just for the activity up to here*/

@@ -1,5 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
-import {loadHeaderFooter} from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 function setupRemoveItemListeners() {
   const removeButtons = document.querySelectorAll(".remove-item");
@@ -9,7 +9,6 @@ function setupRemoveItemListeners() {
       const productId = event.currentTarget.getAttribute("data-id");
       removeFromCart(productId);
       renderCartContents();
-      setupRemoveItemListeners();
     });
   });
 }
@@ -20,47 +19,66 @@ function removeFromCart(productId) {
   localStorage.setItem("so-cart", JSON.stringify(cart));
 }
 
-function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart") || [];
-  
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+function mergeCartItems(cartItems) {
+  const merged = {};
 
-  if (cartItems.length > 0) {
+  cartItems.forEach(item => {
+    if (merged[item.Id]) {
+      merged[item.Id].Quantity += item.Quantity || 1;
+      merged[item.Id].FinalPrice += item.FinalPrice;
+    } else {
+      merged[item.Id] = { ...item };
+      if (!merged[item.Id].Quantity) merged[item.Id].Quantity = 1;
+    }
+  });
+
+  return Object.values(merged);
+}
+
+  function renderCartContents() {
+    let cartItems = getLocalStorage("so-cart") || [];
+    cartItems = mergeCartItems(cartItems);
+
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+    if (cartItems.length > 0) {
       calculateListTotal(cartItems);
-  } else {
+      document.querySelector(".cart-footer").classList.remove("hide");
+    } else {
       document.querySelector(".cart-footer").classList.add("hide");
+      document.querySelector(".cart-total").innerText = "";
+    }
+
+    setupRemoveItemListeners();
   }
 
-  setupRemoveItemListeners();
-}
+  function calculateListTotal(cartItems) {
+    const amounts = cartItems.map((item) => item.FinalPrice);
+    const total = amounts.reduce((sum, item) => sum + item, 0);
 
-function calculateListTotal(cartItems) {
-  const amounts = cartItems.map((item) => item.FinalPrice);
-  const total = amounts.reduce((sum, item) => sum + item, 0);
-  
-  const cartFooter = document.querySelector(".cart-footer");
-  const cartTotal = document.querySelector(".cart-total");
-  
-  cartTotal.innerText = `Total: $${total.toFixed(2)}`; 
-  cartFooter.classList.remove("hide");
-}
+    const cartFooter = document.querySelector(".cart-footer");
+    const cartTotal = document.querySelector(".cart-total");
 
-function cartItemTemplate(item) {
-  return `
+    cartTotal.innerText = `Total: $${total.toFixed(2)}`;
+    cartFooter.classList.remove("hide");
+  }
+
+  function cartItemTemplate(item) {
+    return `
   <li class="cart-card divider">
-  <button class="remove-item" data-id="${item.Id}" aria-label="Remove ${item.Name} from cart">X</button>
-  <a href="#" class="cart-card__image">
-    <img src="${item.Image}" alt="${item.Name}"/>
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
+    <button class="remove-item" data-id="${item.Id}" aria-label="Remove ${item.Name} from cart">X</button>
+    <a href="#" class="cart-card__image">
+      <img src="${item.Image}" alt="${item.Name}"/>
+    </a>
+    <a href="#">
+      <h2 class="card__name">${item.Name}</h2>
+    </a>
+    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+    <p class="cart-card__quantity">qty: ${item.Quantity || 1}</p>
+    <p class="cart-card__price">$${item.FinalPrice}</p>
   </li>`;
-}
+  }
 
-loadHeaderFooter();
-renderCartContents();
+  loadHeaderFooter();
+  renderCartContents();
