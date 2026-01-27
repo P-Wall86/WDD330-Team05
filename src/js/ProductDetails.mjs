@@ -38,8 +38,8 @@ export default class ProductDetails {
         document.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple || "";
 
         const img = document.getElementById("productImage");
-        if (img && this.product.Image) {
-            img.src = this.product.Image;
+        if (img && this.product.Images?.PrimaryLarge) {
+            img.src = this.product.Images?.PrimaryLarge;
             img.alt = this.product.NameWithoutBrand || "Product Image";
         }
 
