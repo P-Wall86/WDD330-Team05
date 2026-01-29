@@ -15,9 +15,56 @@
     <header class="divider" id="main-header"></header>
     <main class="divider">
       <section class="products">
-        <h2>Review & Place your Order</h2>
+      <h2>Review & Place your Order</h2>
       </section>
+      <form name="checkout" id="checkou-form">
+        <h2>Customer Information</h2>
+        <div id="info">
+          <label for="first_name">First Name</label>
+          <input type="text" id="fname" name="first_name" required>
+
+          <label for="last_name">Last Name</label>
+          <input type="text" id="lname" name="last_name" required>
+        </div>
+        <div id="address">
+          <label for="street_address">Street Address</label>
+          <input type="text" id="street_address" name="street_address" required>
+
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required>
+
+          <br>
+
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" required>
+
+          <label for="zip_code">Zip Code</label>
+          <input type="text" id="zip" name="zip_code" required>      
+        </div>
+        <div id="payment">
+          <label for="card_number">Credit Card Number</label>
+          <input type="text" inputmode="numeric" id="card_number" name="card_number" required>
+          
+          <label for="expiration_date">Expiration Date</label>
+          <input type="text" id="expiration_date" name="expiration_date" required>
+
+          <label for="scurity_code">Security Code</label>
+          <input type="text" inputmode="numeric" id="s_code" name="scurity_code" required>
+        </div>
+        <button type="submit" id="checkoutSubmit">Checkout</button>
+      </form>
+
+      <h2>Summary</h2>
+      <div class="checkout-summary">
+        <p>Items: <span id="num-items"></span></p>
+        <p>Item Subtotal: <span id="cartTotal"></span></p>
+        
+        <p>Tax: <span id="tax"></span></p>
+        <p>Shipping Estimate: <span id="shipping"></span></p>
+        <p>Order Total: <span id="orderTotal"></span></p>
+      </div>
     </main>
     <footer id="main-footer"></footer>
+    <script src="../js/checkout.js" type="module"></script>
   </body>
 </html>
