@@ -36,6 +36,7 @@ export default class CheckoutProcess {
     init() {
       this.list = getLocalStorage(this.key);
       this.calculateItemSummary();
+      this.calculateOrderTotal();
     }
     
     calculateItemSummary() {
@@ -91,6 +92,7 @@ export default class CheckoutProcess {
         //console.log(order);
     
         try {
+          console.log("ORDER SENT:", order);
           const response = await services.checkout(order);
           console.log(response);
         } catch (err) {

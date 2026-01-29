@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -370,24 +370,41 @@ footer {
   font-family: 'Arial', sans-serif;
 }
 
+.checkout-header h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
 /* Estilização do Formulário */
 form {
   background: #f9f9f9;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
 
-form h2 {
+form,
+.checkout-summary {
+  padding: 2rem;
+}
+
+.checkout-layout h2 {
   margin-top: 0;
+  margin-bottom: 1.5rem;
   border-bottom: 2px solid #333;
   padding-bottom: 0.5rem;
   color: #2c3e50;
+  font-size: 1.5rem;
 }
 
 /* Organização dos Inputs */
-#info, #address, #payment {
+#info,
+#address,
+#payment {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
@@ -395,7 +412,8 @@ form h2 {
 }
 
 /* Faz campos longos ocuparem a linha toda */
-#street_address, #card_number {
+#street_address,
+#card_number {
   grid-column: span 2;
 }
 
@@ -406,14 +424,15 @@ label {
   color: #555;
 }
 
-input[type="text"], 
+input[type="text"],
 input[type="password"],
 input[type="email"] {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Garante que o padding não aumente o tamanho do input */
+  box-sizing: border-box;
+  /* Garante que o padding não aumente o tamanho do input */
 }
 
 /* Feedback para campos obrigatórios vazios ao tentar enviar */
@@ -443,7 +462,6 @@ input:invalid:focus {
 .checkout-summary {
   background: #fff;
   border: 1px solid #eee;
-  padding: 1.5rem;
   border-radius: 8px;
 }
 
@@ -464,4 +482,32 @@ input:invalid:focus {
   font-size: 1.3rem;
   color: #c0392b;
   font-weight: bold;
+}
+
+/* Desktop query */
+@media (min-width: 900px) {
+  .checkout-header h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+
+  #main-checkout {
+    max-width: min(90vw, 1200px)
+  }
+
+  .checkout-layout h2 {
+    font-size: 1.7rem;
+  }
+
+  .checkout-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  form {
+    margin-bottom: 0;
+  }
 }
