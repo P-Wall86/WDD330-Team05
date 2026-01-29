@@ -484,6 +484,59 @@ input:invalid:focus {
   font-weight: bold;
 }
 
+.alert-message button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #721c24;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Success message */
+.success-message {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #3c6145;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* Alert message */
+.alert {
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  position: relative;
+}
+.alert-message {
+flex-grow: 1;
+}
+
+.alert-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #842029;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+}
+
 /* Desktop query */
 @media (min-width: 900px) {
   .checkout-header h1 {
