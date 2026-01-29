@@ -14,17 +14,13 @@ function formDataToJSON(formElement) {
 }
 
 function packageItems(items) {
-  const simplifiedItems = items.map((item) => {
-    console.log(item);
-    return {
+    return items.map((item) => ({
       id: item.Id,
-      price: item.FinalPrice,
       name: item.Name,
-      quantity: 1,
-    };
-  });
-  return simplifiedItems;
-}
+      price: item.FinalPrice,
+      quantity: 1 // O servidor exige este campo
+    }));
+  }
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
