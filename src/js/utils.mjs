@@ -41,7 +41,6 @@ export async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
   return template
-
 }
 
 export async function loadHeaderFooter() {
@@ -53,7 +52,6 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
-
 }
 
 // get a parameter from the URL query string
@@ -61,4 +59,25 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
+}
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+
+  alert.innerHTML = `
+    <span class="alert-message">${message}</span>
+    <button class="alert-close" aria-label="Close alert">&times;</button>
+  `;
+
+  alert.querySelector('.alert-close').addEventListener('click', () => {
+    alert.remove();
+  });
+
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  main.prepend(alert);
+
+  if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
 }

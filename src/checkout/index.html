@@ -18,43 +18,61 @@
     <section class="checkout-header">
       <h1>Review & Place your Order</h1>
     </section>
+
     <div class="checkout-layout">
       <form name="checkout" id="checkout-form">
         <h2>Customer Information</h2>
         <div id="info">
-          <label for="first_name">First Name</label>
-          <input type="text" id="fname" name="fname" required>
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" required minlength="2" placeholder="John"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñüÜ\s\-']+$"
+            title="Please enter only letters, spaces, hyphens or apostrophes" />
 
-          <label for="last_name">Last Name</label>
-          <input type="text" id="lname" name="lname" required>
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" required minlength="2" placeholder="Doe"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñüÜ\s\-']+$"
+            title="Please enter only letters, spaces, hyphens or apostrophes" />
         </div>
+
         <h2>Shipping Address</h2>
         <div id="address">
           <label for="street_address">Street Address</label>
-          <input type="text" id="street_address" name="street" required>
+          <input type="text" id="street_address" name="street" required placeholder="123 Main St"
+            title="Please enter only letters, spaces, hyphens or apostrophes" />
 
           <label for="city">City</label>
-          <input type="text" id="city" name="city" required>
+          <input type="text" id="city" name="city" required placeholder="New York"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñüÜ\s\-']+$"
+            title="Please enter only letters, spaces, hyphens or apostrophes" />
 
           <label for="state">State</label>
-          <input type="text" id="state" name="state" required>
+          <input type="text" id="state" name="state" required autocomplete="address-level1" placeholder="New York"
+            title="Please enter only letters, spaces, hyphens or apostrophes" />
 
-          <label for="zip_code">Zip Code</label>
-          <input type="text" id="zip" name="zip" required>
+          <label for="zip">Zip Code</label>
+          <input type="text" id="zip" name="zip" required inputmode="numeric"
+            title="Zip code can contain letters, numbers, spaces or hyphens">
         </div>
+
         <h2>Payment Information</h2>
         <div id="payment">
           <label for="card_number">Credit Card Number</label>
-          <input type="text" inputmode="numeric" id="card_number" name="cardNumber" required>
+          <input type="text" id="card_number" name="cardNumber" required inputmode="numeric" pattern="\d{13,19}"
+            maxlength="19" autocomplete="cc-number" placeholder="1234567890123456"
+            title="Enter a valid credit card number, 13 to 19 digits" />
 
           <label for="expiration_date">Expiration Date</label>
-          <input type="text" id="expiration_date" name="expiration" required>
+          <input type="text" id="expiration_date" name="expiration" required pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$"
+            placeholder="MM/YY" title="Enter expiration date in MM/YY format, e.g., 10/31" />
 
-          <label for="scurity_code">Security Code</label>
-          <input type="text" inputmode="numeric" id="s_code" name="code" required>
+          <label for="s_code">Security Code</label>
+          <input type="text" id="s_code" name="code" required inputmode="numeric" pattern="\d{3,4}" maxlength="4"
+            autocomplete="cc-csc" placeholder="123" title="Enter 3 or 4 digit security code" />
         </div>
-        <button type="submit" id="checkoutSubmit">Checkout</button>
+
+        <button type="button" id="checkoutSubmit">Checkout</button>
       </form>
+
       <div class="summary-wrapper">
         <div class="checkout-summary">
           <h2>Summary</h2>
@@ -69,7 +87,7 @@
     </div>
   </main>
   <footer id="main-footer"></footer>
-  <script src="../js/checkout.js" type="module"></script>
+  <script src="/js/checkout.js" type="module"></script>
 </body>
 
 </html>
