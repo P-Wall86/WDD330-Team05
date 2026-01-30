@@ -15,5 +15,7 @@ if (titleElement) {
   titleElement.textContent = category.charAt(0).toUpperCase() + category.slice(1);
 }
 
-const productList = new ProductList(category, dataSource, listElement);
-productList.init();
+window.addEventListener("DOMContentLoaded", () => {
+  const productList = new ProductList(category, dataSource, listElement);
+  productList.init();
+});
