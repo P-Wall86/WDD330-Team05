@@ -1,4 +1,4 @@
-import { getLocalStorage, loadHeaderFooter, alertMessage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, loadHeaderFooter, alertMessage } from "./utils.mjs";
 
 function setupRemoveItemListeners() {
   const removeButtons = document.querySelectorAll(".remove-item");
@@ -15,7 +15,7 @@ function setupRemoveItemListeners() {
 function removeFromCart(productId) {
   let cart = getLocalStorage("so-cart") || [];
   cart = cart.filter((item) => item.Id !== productId);
-  localStorage.setItem("so-cart", JSON.stringify(cart));
+  setLocalStorage("so-cart", cart);
 }
 
 function mergeCartItems(cartItems) {
@@ -34,6 +34,24 @@ function mergeCartItems(cartItems) {
   return Object.values(merged);
 }
 
+function updateQuantity(productId, newQty) {
+  let cartItems = getLocalStorage("so-cart") || [];
+  cartItems = mergeCartItems(cartItems);
+  
+  const itemIndex = cartItems.findIndex((item) => item.Id === productId);
+  
+  if (itemIndex > -1 && newQty > 0) {
+    const item = cartItems[itemIndex];
+    const unitPrice = item.FinalPrice / item.Quantity;
+    
+    item.Quantity = newQty;
+    item.FinalPrice = unitPrice * newQty;
+    
+    setLocalStorage("so-cart", cartItems);
+    renderCartContents();
+  }
+}
+
 function renderCartContents() {
   let cartItems = getLocalStorage("so-cart") || [];
   cartItems = mergeCartItems(cartItems);
@@ -50,6 +68,15 @@ function renderCartContents() {
   }
 
   setupRemoveItemListeners();
+  
+  const qtyInputs = document.querySelectorAll(".qty-input");
+  qtyInputs.forEach((input) => {
+    input.addEventListener("change", (e) => {
+      const newQty = parseInt(e.target.value);
+      const id = e.target.dataset.id;
+      updateQuantity(id, newQty);
+    });
+  });
 }
 
 function calculateListTotal(cartItems) {
@@ -68,13 +95,19 @@ function cartItemTemplate(item) {
   <li class="cart-card divider">
     <button class="remove-item" data-id="${item.Id}" aria-label="Remove ${item.Name} from cart">X</button>
     <a href="#" class="cart-card__image">
-      <img src="${item.Images?.PrimaryMedium}" alt="${item.Name}"/>
+      <img src="${item.Images?.PrimaryMedium || item.Image}" alt="${item.Name}"/>
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
     </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: ${item.Quantity || 1}</p>
+    <p class="cart-card__color">${item.Colors?.[0]?.ColorName || ""}</p>
+    
+    <div class="cart-card__quantity">
+      <label for="qty-${item.Id}">Qty:</label>
+      <input id="qty-${item.Id}" type="number" class="qty-input" 
+             data-id="${item.Id}" value="${item.Quantity}" min="1" style="width: 50px;">
+    </div>
+    
     <p class="cart-card__price">$${item.FinalPrice.toFixed(2)}</p>
   </li>`;
 }
@@ -92,4 +125,3 @@ if (checkoutBtn) {
     }
   });
 }
-

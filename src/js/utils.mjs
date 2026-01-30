@@ -62,22 +62,22 @@ export function getParam(param) {
 }
 
 export function alertMessage(message, scroll = true) {
-  const alert = document.createElement('div');
-  alert.classList.add('alert');
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
 
   alert.innerHTML = `
     <span class="alert-message">${message}</span>
     <button class="alert-close" aria-label="Close alert">&times;</button>
   `;
 
-  alert.querySelector('.alert-close').addEventListener('click', () => {
+  alert.querySelector(".alert-close").addEventListener("click", () => {
     alert.remove();
   });
 
-  const main = document.querySelector('main');
+  const main = document.querySelector("main");
   if (!main) return;
 
   main.prepend(alert);
 
-  if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
 }
