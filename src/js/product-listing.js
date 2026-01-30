@@ -6,18 +6,14 @@ loadHeaderFooter();
 
 const category = getParam("category");
 
-const title = document.getElementById("product-title");
-if (title) {
-    const prettyCategory = category
-        .replace("-", " ")
-        .replace(/\b\w/g, l => l.toUpperCase());
+const dataSource = new ExternalServices(); 
 
-    title.textContent = `Top Products: ${prettyCategory}`;
+const listElement = document.querySelector(".product-list");
+
+const titleElement = document.querySelector("#category-name");
+if (titleElement) {
+  titleElement.textContent = category.charAt(0).toUpperCase() + category.slice(1);
 }
 
-const dataSource = new ExternalServices(category);
-const list = document.querySelector(".product-list");
-
-const productList = new ProductList(category, dataSource, list);
-
+const productList = new ProductList(category, dataSource, listElement);
 productList.init();
