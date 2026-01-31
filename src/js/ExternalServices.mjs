@@ -10,31 +10,34 @@ async function convertToJson(res) {
 }
 
 export default class ExternalServices {
-  constructor() {
-  }
+  constructor() {}
 
   async getData(category) {
     const response = await fetch(`${baseURL}products/search/${category}`);
     const data = await convertToJson(response);
-    console.log("Dados da API (Listagem):", data);
-
     return data.Result;
+  }
+
+  // Nova função para buscar em todas as categorias e filtrar por nome
+  async searchProducts(query) {
+    const categories = ["tents", "backpacks", "sleeping-bags", "hammocks"];
+    const allProducts = await Promise.all(
+      categories.map((cat) => this.getData(cat))
+    );
+    
+    // Une todos os produtos de todas as categorias em um único array
+    const flatProducts = allProducts.flat();
+    
+    // Filtra os produtos pelo nome ou marca (case insensitive)
+    return flatProducts.filter(product => 
+      product.Name.toLowerCase().includes(query.toLowerCase()) ||
+      product.Brand.Name.toLowerCase().includes(query.toLowerCase())
+    );
   }
 
   async findProductById(id) {
     const response = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(response);
     return data.Result;
-  }
-
-  async checkout(order) {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(order),
-    };
-    return await fetch(baseURL + "checkout", options).then(convertToJson);
   }
 }
