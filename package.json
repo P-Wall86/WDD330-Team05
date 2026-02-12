@@ -4,7 +4,8 @@
   "description": "Boilerplate for WDD 330 SleepOutside project",
   "main": "main.js",
   "scripts": {
-    "start": "vite",
+    "start": "npm run build && node main.js",
+    "dev": "vite",
     "build": "vite build --emptyOutDir",
     "lint": "eslint *.js src/**/*.js",
     "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
@@ -14,6 +15,7 @@
   "author": "Shane Thompson",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
     "vite": "^7.3.1"
   },
   "devDependencies": {
