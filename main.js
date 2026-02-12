@@ -1,15 +1,19 @@
 import express from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import fs from 'fs';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
-const workDir = process.cwd();
-const distPath = path.resolve(workDir, 'dist');
+const distPath = path.join(__dirname, 'dist');
 
 // Log startup info
 console.log(`Starting server...`);
-console.log(`Working directory: ${workDir}`);
+console.log(`Script location: ${__filename}`);
+console.log(`Script directory: ${__dirname}`);
 console.log(`Looking for dist at: ${distPath}`);
 console.log(`Dist exists: ${fs.existsSync(distPath)}`);
 
