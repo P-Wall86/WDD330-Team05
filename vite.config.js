@@ -13,12 +13,12 @@ export default defineConfig({
     outDir: "../dist",
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "src", "index.html"),
-        cart: resolve(__dirname, "src", "cart", "index.html"),
-        checkout: resolve(__dirname, "src", "checkout", "index.html"),
-        product1: resolve(__dirname, "src", "product_pages", "index.html"),
-        product_listing: resolve(__dirname, "src", "product_listing", "index.html"),
-        success: resolve(__dirname, "src", "checkout", "success.html")
+        main: resolve("src", "index.html"),
+        cart: resolve("src", "cart", "index.html"),
+        checkout: resolve("src", "checkout", "index.html"),
+        product1: resolve("src", "product_pages", "index.html"),
+        product_listing: resolve("src", "product_listing", "index.html"),
+        success: resolve("src", "checkout", "success.html")
       },
     },
   },
