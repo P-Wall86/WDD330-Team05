@@ -8,12 +8,12 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: "index.html",
-        cart: "cart/index.html",
-        checkout: "checkout/index.html",
-        productListing: "product_listing/index.html",
-        productPages: "product_pages/index.html",
-        success: "checkout/success.html"
+        main: "src/index.html",
+        cart: "src/cart/index.html",
+        checkout: "src/checkout/index.html",
+        productListing: "src/product_listing/index.html",
+        productPages: "src/product_pages/index.html",
+        success: "src/checkout/success.html"
       },
       output: {
         entryFileNames: "js/[name].js",
