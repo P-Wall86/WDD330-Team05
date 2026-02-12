@@ -56,8 +56,8 @@ export async function loadTemplate(url) {
 // Load header and footer templates (expects partials in /partials/)
 export async function loadHeaderFooter() {
   // partials are located in src/public/partials so fetch from that path
-  const headerTemplate = await loadTemplate("/src/public/partials/header.html");
-  const footerTemplate = await loadTemplate("/src/public/partials/footer.html");
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
 
   const headerElement = document.getElementById("main-header") || document.querySelector("#main-header");
   const footerElement = document.getElementById("main-footer") || document.querySelector("#main-footer");
