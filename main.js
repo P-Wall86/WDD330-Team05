@@ -28,7 +28,28 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// SPA fallback - serve index.html for all non-file routes
+// Serve specific HTML files for each route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
+app.get('/cart*', (req, res) => {
+  res.sendFile(path.join(distPath, 'cart/index.html'));
+});
+
+app.get('/checkout*', (req, res) => {
+  res.sendFile(path.join(distPath, 'checkout/index.html'));
+});
+
+app.get('/product_listing*', (req, res) => {
+  res.sendFile(path.join(distPath, 'product_listing/index.html'));
+});
+
+app.get('/product_pages*', (req, res) => {
+  res.sendFile(path.join(distPath, 'product_pages/index.html'));
+});
+
+// SPA fallback - serve main index.html for any other routes
 app.get('*', (req, res) => {
   const indexPath = path.join(distPath, 'index.html');
   
@@ -42,8 +63,6 @@ app.get('*', (req, res) => {
     }
     return res.status(500).send(message);
   }
-  
-  res.sendFile(indexPath);
 });
 
 // Error handler
