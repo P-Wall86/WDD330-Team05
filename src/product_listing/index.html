@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Home</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/product-listing.js" type="module"></script>
+</head>
+
+<body>
+    <header class="divider" id="main-header"></header>
+    <main class="divider">
+        <section class="products">
+            <h2>Top Products: <span id="category-name" class="title highlight"></span></h2>
+            <div class="sort-container">
+                <label for="sort">Sort by:</label>
+                <select id="sort">
+                    <option value="default">Default</option>
+                    <option value="name">Name (A–Z)</option>
+                    <option value="price">Price (Low to High)</option>
+                </select>
+            </div>
+            <ul class="product-list"></ul>
+        </section>
+    </main>
+
+    <div id="quick-view-modal">
+        <div>
+            <button id="modal-close">✖</button>
+            <h2 id="modal-title"></h2>
+            <img id="modal-image" src="" alt="modal-image"/>
+            <p id="modal-brand"></p>
+            <p id="modal-price"></p>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <footer id="main-footer"></footer>
+</body>
+
+</html>

@@ -24,22 +24,22 @@ export default class ProductDetails {
 
     renderProductDetails() {
         document.querySelector("h3").textContent = this.product.Brand?.Name || "No Brand";
-        
+
         document.querySelector("h2.divider").textContent = this.product.NameWithoutBrand || "No Name";
-        
+
         // Render discount badge if discount exists
         this.renderDiscountBadge();
-        
+
         document.querySelector(".product-card__price").textContent = `$${this.product.FinalPrice?.toFixed(2) || "0.00"}`;
-        
+
         const colorName = this.product.Colors?.[0]?.ColorName || "";
         document.querySelector(".product__color").textContent = colorName;
-        
+
         document.querySelector(".product__description").innerHTML = this.product.DescriptionHtmlSimple || "";
 
         const img = document.getElementById("productImage");
-        if (img && this.product.Image) {
-            img.src = this.product.Image;
+        if (img && this.product.Images?.PrimaryLarge) {
+            img.src = this.product.Images?.PrimaryLarge;
             img.alt = this.product.NameWithoutBrand || "Product Image";
         }
 
